@@ -70,17 +70,21 @@
         </datalist>
       </fieldset>
 
-      <fieldset>
+    <fieldset>
         <legend>Como você quer participar? *</legend>
 
-        <input type="radio" id="perfil-candidato" name="perfil" value="candidato" required>
-        <label for="perfil-candidato">Candidato: quero montar meu portfólio e acessar vagas</label>
-
-        <input type="radio" id="perfil-voluntario" name="perfil" value="voluntario">
-        <label for="perfil-voluntario">Voluntário: quero mentorar ou revisar portfólios</label>
-
-        <input type="radio" id="perfil-doador" name="perfil" value="doador">
-        <label for="perfil-doador">Doador: quero apoiar financeiramente</label>
+        <div class="opcao">
+          <input type="radio" id="perfil-candidato" name="perfil" value="candidato" required>
+          <label for="perfil-candidato">Candidato: quero montar meu portfólio e acessar vagas</label>
+        </div>
+        <div class="opcao">
+          <input type="radio" id="perfil-voluntario" name="perfil" value="voluntario">
+          <label for="perfil-voluntario">Voluntário: quero mentorar ou revisar portfólios</label>
+        </div>
+        <div class="opcao">
+          <input type="radio" id="perfil-doador" name="perfil" value="doador">
+          <label for="perfil-doador">Doador: quero apoiar financeiramente</label>
+        </div>
       </fieldset>
 
       <fieldset>
@@ -104,10 +108,12 @@
                placeholder="Ex.: leitor de tela, intérprete de Libras, tempo estendido">
       </fieldset>
 
-      <fieldset>
+    <fieldset>
         <legend>Consentimento</legend>
-        <input type="checkbox" id="lgpd" name="lgpd" required>
-        <label for="lgpd">Autorizo o uso dos meus dados para contato sobre a plataforma, conforme a LGPD. *</label>
+        <div class="opcao">
+          <input type="checkbox" id="lgpd" name="lgpd" required>
+          <label for="lgpd">Autorizo o uso dos meus dados para contato sobre a plataforma, conforme a LGPD. *</label>
+        </div>
       </fieldset>
 
       <button type="submit">Enviar cadastro</button>
