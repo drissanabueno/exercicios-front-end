@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cadastre-se na Primeira Porta como candidato, voluntário ou doador.">
+  <title>Cadastro — Primeira Porta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#conteudo" class="pular">Pular para o conteúdo</a>
+
+  <header>
+    <p class="marca">Primeira Porta</p>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li><a href="cadastro.html" aria-current="page">Cadastro</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <h1>Cadastro</h1>
+    <p>Preencha os dados abaixo. Os campos marcados com * são obrigatórios.</p>
+
+    <form action="#" method="post">
+
+      <fieldset>
+        <legend>Dados pessoais</legend>
+
+        <label for="nome">Nome completo *</label>
+        <input type="text" id="nome" name="nome" required minlength="3" autocomplete="name">
+
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+
+        <label for="cpf">CPF *</label>
+        <input type="text" id="cpf" name="cpf" required
+               pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+               placeholder="000.000.000-00" title="Formato: 000.000.000-00" inputmode="numeric">
+
+        <label for="telefone">Telefone celular *</label>
+        <input type="tel" id="telefone" name="telefone" required
+               pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
+               placeholder="(00) 00000-0000" title="Formato: (00) 00000-0000" autocomplete="tel">
+
+        <label for="nascimento">Data de nascimento</label>
+        <input type="date" id="nascimento" name="nascimento" max="2010-12-31">
+      </fieldset>
+
+      <fieldset>
+        <legend>Endereço</legend>
+
+        <label for="cep">CEP *</label>
+        <input type="text" id="cep" name="cep" required
+               pattern="[0-9]{5}-[0-9]{3}"
+               placeholder="00000-000" title="Formato: 00000-000" inputmode="numeric" autocomplete="postal-code">
+
+        <label for="cidade">Cidade *</label>
+        <input type="text" id="cidade" name="cidade" required autocomplete="address-level2">
+
+        <label for="estado">Estado *</label>
+        <input type="text" id="estado" name="estado" required list="estados" maxlength="2"
+               pattern="[A-Z]{2}" placeholder="PR" title="Sigla com duas letras maiúsculas">
+        <datalist id="estados">
+          <option value="PR"><option value="SC"><option value="RS">
+          <option value="SP"><option value="RJ"><option value="MG">
+        </datalist>
+      </fieldset>
+
+      <fieldset>
+        <legend>Como você quer participar? *</legend>
+
+        <input type="radio" id="perfil-candidato" name="perfil" value="candidato" required>
+        <label for="perfil-candidato">Candidato: quero montar meu portfólio e acessar vagas</label>
+
+        <input type="radio" id="perfil-voluntario" name="perfil" value="voluntario">
+        <label for="perfil-voluntario">Voluntário: quero mentorar ou revisar portfólios</label>
+
+        <input type="radio" id="perfil-doador" name="perfil" value="doador">
+        <label for="perfil-doador">Doador: quero apoiar financeiramente</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Sobre você</legend>
+
+        <label for="area">Área de interesse</label>
+        <select id="area" name="area">
+          <option value="">Selecione</option>
+          <option value="front-end">Front-end</option>
+          <option value="back-end">Back-end</option>
+          <option value="dados">Dados</option>
+          <option value="suporte">Suporte e infraestrutura</option>
+        </select>
+
+        <label for="mensagem">Conte um pouco da sua história</label>
+        <textarea id="mensagem" name="mensagem" rows="5" maxlength="600"
+                  placeholder="O que você já sabe fazer? O que quer aprender?"></textarea>
+
+        <label for="acessibilidade">Precisa de algum recurso de acessibilidade?</label>
+        <input type="text" id="acessibilidade" name="acessibilidade"
+               placeholder="Ex.: leitor de tela, intérprete de Libras, tempo estendido">
+      </fieldset>
+
+      <fieldset>
+        <legend>Consentimento</legend>
+        <input type="checkbox" id="lgpd" name="lgpd" required>
+        <label for="lgpd">Autorizo o uso dos meus dados para contato sobre a plataforma, conforme a LGPD. *</label>
+      </fieldset>
+
+      <button type="submit">Enviar cadastro</button>
+      <button type="reset">Limpar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>Primeira Porta · Curitiba, 2026</p>
+  </footer>
+</body>
+</html>
