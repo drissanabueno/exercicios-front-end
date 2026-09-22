@@ -38,7 +38,7 @@ select:focus-visible, textarea:focus-visible {
 
 /* Cabeçalho e menu */
 header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.marca { font-weight: 700; font-size: 1.25rem; color: var(--cor-marca); margin: 0; }
+.marca { display: inline-flex; align-items: center; gap: 0.6rem; font-family: Georgia, "Times New Roman", serif; font-weight: 600; font-size: 1.3rem; color: var(--cor-texto); text-decoration: none; }
 nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
 nav a[aria-current="page"] { font-weight: 700; text-decoration: none; }
 
@@ -83,6 +83,7 @@ button {
   margin-right: 0.5rem;
 }
 button[type="reset"] { background: transparent; color: var(--cor-marca); }
-
+img { max-width: 100%; height: auto; }
+address { font-style: normal; }
 /* Rodapé */
 footer { color: #5a6660; border-top: 1px solid var(--cor-borda); margin-top: 2rem; }

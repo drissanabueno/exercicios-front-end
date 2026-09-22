@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="titulo">
+  <title id="titulo">Primeira Porta</title>
+  <rect x="9" y="6" width="9" height="36" rx="2" fill="#1f2a24"/>
+  <path d="M22 9 L34 4 L34 44 L22 39 Z" fill="#2f6b4f"/>
+</svg>
