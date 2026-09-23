@@ -6,9 +6,9 @@ Experiências práticas da disciplina **Desenvolvimento Front-end para Web** (En
 
 | Pasta | Tema | Status |
 |---|---|---|
-| [`ep1-primeira-porta`](ep1-primeira-porta/) | HTML5 semântico, formulários com validação nativa e máscaras, estrutura de projeto | em andamento |
+| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas e Flexbox | EP 1 entregue · EP 2 em andamento |
 
-## EP 1 — Primeira Porta
+## Primeira Porta (EP 1 e EP 2)
 
 Site institucional de uma ONG fictícia de empregabilidade tech inclusiva (projeto que criei na disciplina de Design Profissional). Três páginas:
 
@@ -22,7 +22,7 @@ O CSS usa variáveis (`:root`) como tokens, foco visível para navegação por t
 
 ### Como ver
 
-Abra `ep1-primeira-porta/index.html` no navegador. Não precisa de servidor.
+Abra `primeira-porta/index.html` no navegador. Não precisa de servidor.
 
 ## Autora
 
