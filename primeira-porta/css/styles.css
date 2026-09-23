@@ -78,8 +78,7 @@ body {
 header, main, footer {
   max-width: var(--largura-max);
   margin: 0 auto;
-  padding: var(--e-2);
-}
+  padding: var(--e-2) var(--margem);}
 h1, h2, h3 {
   font-family: var(--fonte-titulo);
   font-weight: 500;
@@ -119,11 +118,79 @@ header { display: flex; align-items: center; justify-content: space-between; gap
 nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
 nav a[aria-current="page"] { font-weight: 700; text-decoration: none; }
 
-/* Conteúdo */
-section, article { margin-bottom: 2rem; }
-article { background: #fff; border: 1px solid var(--cor-borda); border-radius: 8px; padding: 1rem 1.25rem; }
+/* 2. Grid de 12 colunas e breakpoints
+   Mobile first. A tela muda só margem e gutter; o grid é sempre de 12 colunas. */
+:root {
+  --margem: var(--e-2);  /* margem lateral do conteúdo */
+  --gutter: var(--e-2);  /* espaço entre colunas */
+}
+@media (min-width: 480px)  { :root { --margem: var(--e-3); } }
+@media (min-width: 768px)  { :root { --margem: var(--e-4); --gutter: var(--e-3); } }
+@media (min-width: 1024px) { :root { --gutter: var(--e-4); } }
+@media (min-width: 1440px) { :root { --largura-max: 80rem; } } /* 1280 px */
+
+/* Os blocos principais são grids de 12 colunas; por padrão cada filho ocupa as 12 */
+main,
+#apresentacao,
+#como-funciona,
+#numeros ul {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--e-3);
+}
+main > *,
+#apresentacao > *,
+#como-funciona > *,
+#numeros li { grid-column: 1 / -1; }
+
+/* Seções e cartões */
+section { padding: var(--e-5) 0; }
+section + section { border-top: 1px solid var(--cor-borda); }
+#como-funciona {
+  background: var(--cor-marca-clara);
+  border: 0;
+  border-radius: var(--raio-2);
+  padding: var(--e-4) var(--e-3);
+}
+#numeros ul { list-style: none; margin: 0; padding: 0; }
+#numeros li {
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-h3);
+  border-top: 2px solid var(--cor-texto);
+  padding-top: var(--e-2);
+}
+article {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-2);
+  padding: var(--e-3);
+  box-shadow: var(--sombra-1);
+  margin: 0;
+}
 article header { display: block; padding: 0; max-width: none; }
-article header p { color: #5a6660; margin: 0 0 0.5rem; }
+article header p { color: var(--cor-texto-suave); margin: 0 0 var(--e-1); }
+
+/* Ocupação das colunas por breakpoint */
+@media (min-width: 768px) {
+  section { padding: var(--e-6) 0; }
+  #como-funciona > article { grid-column: span 4; }  /* três blocos: 4 · 4 · 4 */
+  #numeros li { grid-column: span 4; }
+  main > article { grid-column: span 6; }            /* projetos em 2 × 2 */
+  main > form { grid-column: 2 / 12; }
+}
+@media (min-width: 1024px) {
+  #apresentacao h1 { grid-column: 1 / 9; }
+  #apresentacao p { grid-column: 1 / 7; }
+  main > form { grid-column: 3 / 11; }
+}
+@media (min-width: 1280px) {
+  #apresentacao h1 { grid-column: 1 / 8; }
+}
+@media (min-width: 1440px) {
+  main > article { grid-column: span 3; }            /* quatro projetos em linha */
+  #apresentacao p { grid-column: 1 / 6; }
+}
 
 /* Formulário: um campo por linha */
 fieldset { border: 1px solid var(--cor-borda); border-radius: 8px; padding: 1rem 1.25rem; margin: 0 0 1.5rem; }
