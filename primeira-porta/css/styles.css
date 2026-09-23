@@ -195,22 +195,15 @@ article header p { color: var(--cor-texto-suave); margin: 0 0 var(--e-1); }
 /* Cabeçalho: logo à esquerda, menu à direita; empilha no celular */
 body > header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: var(--e-2);
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--e-2) var(--e-3);
   padding-top: var(--e-2);
   padding-bottom: var(--e-2);
   border-bottom: 1px solid var(--cor-borda);
 }
-@media (min-width: 480px) {
-  body > header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--e-3);
-  }
-}
+
 .marca {
   display: inline-flex;
   align-items: center;
@@ -367,4 +360,139 @@ body > footer a { color: var(--cor-marca-clara); }
 body > footer small { color: var(--cor-borda); }
 @media (min-width: 768px) {
   body > footer { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+}
+
+/* 4. Menu responsivo: hambúrguer no celular, submenu em telas largas
+   Sem JavaScript: o estado aberto/fechado é um checkbox escondido (:checked). */
+
+/* O checkbox fica invisível, mas continua acessível ao teclado */
+.menu-controle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* O botão "Menu" é o label do checkbox */
+.menu-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  min-height: var(--e-5);
+  margin: 0;
+  padding: 0 var(--e-2);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-1);
+  background: var(--cor-superficie);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.menu-icone {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; /* as três linhas */
+}
+.menu-controle:focus-visible + .menu-botao { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
+.menu-controle:checked + .menu-botao { background: var(--cor-marca-clara); border-color: var(--cor-marca); }
+
+/* Celular: o menu começa fechado; ao marcar o checkbox, aparece em coluna, na largura toda */
+body > header nav { display: none; width: 100%; }
+.menu-controle:checked ~ nav { display: block; }
+body > header nav ul {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding-top: var(--e-1);
+  border-top: 1px solid var(--cor-borda);
+}
+body > header nav a {
+  display: block;
+  padding: var(--e-1) var(--e-2);
+  border-bottom: 0;
+  border-left: 3px solid transparent;
+  border-radius: 0 var(--raio-1) var(--raio-1) 0;
+}
+body > header nav a[aria-current="page"] {
+  border-left-color: var(--cor-marca);
+  background: var(--cor-marca-clara);
+}
+.submenu {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--e-1) var(--e-3);
+}
+.submenu a { color: var(--cor-texto-suave); }
+
+/* Tablet em diante: botão some, menu fica em linha e o submenu vira dropdown */
+@media (min-width: 768px) {
+  .menu-botao { display: none; }
+  body > header nav,
+  .menu-controle:checked ~ nav { display: block; width: auto; }
+  body > header nav ul {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--e-3);
+    padding: 0;
+    border: 0;
+  }
+  .tem-submenu { position: relative; }
+    body > header nav > ul > li > a {
+    padding: var(--e-1) 0;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+  }
+  body > header nav > ul > li > a[aria-current="page"] { border-bottom-color: var(--cor-marca); }
+  .tem-submenu > a::after {
+    content: "";
+    display: inline-block;
+    width: 0.45em;
+    height: 0.45em;
+    margin-left: 0.4em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.15em) rotate(45deg); /* setinha para baixo */
+  }
+  .submenu {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    min-width: 14rem;
+    margin: 0;
+    padding: var(--e-1) 0;
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-2);
+    box-shadow: var(--sombra-2);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.15s, transform 0.15s, visibility 0s linear 0.15s;
+  }
+  .tem-submenu:hover .submenu,
+  .tem-submenu:focus-within .submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+  .submenu a {
+    padding: var(--e-1) var(--e-2);
+    border: 0;
+    border-radius: 0;
+    color: var(--cor-texto);
+  }
+  .submenu a:hover,
+  .submenu a:focus-visible { background: var(--cor-marca-clara); color: var(--cor-marca); }
 }
