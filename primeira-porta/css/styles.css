@@ -112,12 +112,6 @@ select:focus-visible, textarea:focus-visible {
 }
 .pular:focus { left: 1rem; top: 1rem; background: #fff; padding: 0.5rem; }
 
-/* Cabeçalho e menu */
-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.marca { display: inline-flex; align-items: center; gap: 0.6rem; font-family: Georgia, "Times New Roman", serif; font-weight: 600; font-size: 1.3rem; color: var(--cor-texto); text-decoration: none; }
-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
-nav a[aria-current="page"] { font-weight: 700; text-decoration: none; }
-
 /* 2. Grid de 12 colunas e breakpoints
    Mobile first. A tela muda só margem e gutter; o grid é sempre de 12 colunas. */
 :root {
@@ -178,11 +172,13 @@ article header p { color: var(--cor-texto-suave); margin: 0 0 var(--e-1); }
   #numeros li { grid-column: span 4; }
   main > article { grid-column: span 6; }            /* projetos em 2 × 2 */
   main > form { grid-column: 2 / 12; }
+  main:has(> form) > h1, main:has(> form) > p { grid-column: 2 / 12; }
 }
 @media (min-width: 1024px) {
   #apresentacao h1 { grid-column: 1 / 9; }
   #apresentacao p { grid-column: 1 / 7; }
   main > form { grid-column: 3 / 11; }
+  main:has(> form) > h1, main:has(> form) > p { grid-column: 3 / 11; }
 }
 @media (min-width: 1280px) {
   #apresentacao h1 { grid-column: 1 / 8; }
@@ -192,42 +188,183 @@ article header p { color: var(--cor-texto-suave); margin: 0 0 var(--e-1); }
   #apresentacao p { grid-column: 1 / 6; }
 }
 
-/* Formulário: um campo por linha */
-fieldset { border: 1px solid var(--cor-borda); border-radius: 8px; padding: 1rem 1.25rem; margin: 0 0 1.5rem; }
-legend { font-weight: 700; padding: 0 0.5rem; }
-label { display: block; margin-top: 0.75rem; font-weight: 600; }
-input, select, textarea {
-  display: block;
-  width: 100%;
-  max-width: 28rem;
-  margin-top: 0.25rem;
-  padding: 0.5rem 0.65rem;
-  font: inherit;
-  border: 1px solid var(--cor-borda);
-  border-radius: 6px;
-}
-.opcao {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  margin: 0.6rem 0;
-}
-.opcao input { display: inline-block; width: auto; margin: 0.35rem 0 0; }
-.opcao label { display: inline; margin: 0; font-weight: 400; }
+/* 3. Componentes em Flexbox
+   Cada bloco abaixo é um container flex: uma dimensão, alinhamento e espaço entre itens.
+   O layout macro (páginas e seções) continua no Grid do bloco 2. */
 
-input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #b3261e; }
-button {
+/* Cabeçalho: logo à esquerda, menu à direita; empilha no celular */
+body > header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  padding-top: var(--e-2);
+  padding-bottom: var(--e-2);
+  border-bottom: 1px solid var(--cor-borda);
+}
+@media (min-width: 480px) {
+  body > header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--e-3);
+  }
+}
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: var(--t-destaque);
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+/* Menu: itens em linha, quebram se faltar espaço; item ativo sublinhado na cor da marca */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-3);
+}
+nav a {
+  display: inline-block;
+  padding: var(--e-1) 0;
+  color: var(--cor-texto);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav a:hover { color: var(--cor-marca); }
+nav a[aria-current="page"] { font-weight: 600; border-bottom-color: var(--cor-marca); }
+
+/* Cabeçalho dos cartões de projeto: título menor que o da página, data em sobretítulo */
+article h2 { font-size: var(--t-h3); margin-bottom: var(--e-1); }
+article header p {
+  font-size: var(--t-legenda);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-destaque);
+}
+article header p time { font-size: inherit; color: inherit; }
+article > p:last-child { margin-bottom: 0; }
+
+/* Botões: primário na cor da marca, secundário só com borda; mínimo de 48 px de altura */
+.botao, button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-1);
+  min-height: var(--e-5);
+  padding: 0 var(--e-3);
   font: inherit;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  border: 1px solid var(--cor-marca);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid var(--cor-marca);
+  border-radius: var(--raio-1);
   background: var(--cor-marca);
   color: #fff;
   cursor: pointer;
-  margin-right: 0.5rem;
+  transition: background-color 0.15s, border-color 0.15s;
 }
-button[type="reset"] { background: transparent; color: var(--cor-marca); }
+.botao:hover, button:hover {
+  background: var(--cor-marca-escura);
+  border-color: var(--cor-marca-escura);
+}
+button[type="reset"] {
+  background: transparent;
+  color: var(--cor-texto);
+  border-color: var(--cor-borda);
+}
+button[type="reset"]:hover { background: var(--cor-marca-clara); border-color: var(--cor-borda); }
+
+/* Grupo de botões: empilhados no celular, lado a lado a partir de 480 px */
+.acoes { display: flex; flex-direction: column; gap: var(--e-2); }
+@media (min-width: 480px) { .acoes { flex-direction: row; } }
+
+/* Formulário: grupos como cartões, um campo por linha */
+form { display: flex; flex-direction: column; gap: var(--e-4); }
+fieldset {
+  margin: 0;
+  padding: var(--e-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-2);
+  background: var(--cor-superficie);
+}
+legend {
+  padding: 0 var(--e-1);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: var(--t-h3);
+}
+label { display: block; margin-top: var(--e-2); font-weight: 600; }
+input, select, textarea {
+  display: block;
+  width: 100%;
+  min-height: var(--e-5);
+  margin-top: var(--e-1);
+  padding: var(--e-1) var(--e-2);
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-superficie);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-1);
+  transition: border-color 0.15s;
+}
+textarea { min-height: 8rem; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--cor-texto-suave); }
+input:hover, select:hover, textarea:hover { border-color: var(--cor-texto-suave); }
+input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--cor-marca); }
+input:user-valid, select:user-valid, textarea:user-valid { border-color: var(--cor-marca); }
+input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: var(--cor-erro); }
+
+/* Opção (radio ou checkbox): controle e texto alinhados; a marcada ganha fundo verde-claro */
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-2);
+  margin-top: var(--e-1);
+  padding: var(--e-2);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-2);
+  background: var(--cor-superficie);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.opcao:has(input:checked) { border-color: var(--cor-marca); background: var(--cor-marca-clara); }
+.opcao input {
+  flex: none;
+  display: inline-block;
+  width: auto;
+  min-height: 0;
+  margin: 0.3rem 0 0;
+  accent-color: var(--cor-marca);
+}
+.opcao label { display: inline; margin: 0; font-weight: 400; }
+
 img { max-width: 100%; height: auto; }
 address { font-style: normal; }
-/* Rodapé */
-footer { color: #5a6660; border-top: 1px solid var(--cor-borda); margin-top: 2rem; }
+
+/* Rodapé: largura total, escuro, conteúdo alinhado com o container */
+body > footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-3);
+  max-width: none;
+  margin-top: var(--e-6);
+  padding-top: var(--e-5);
+  padding-bottom: var(--e-5);
+  padding-inline: max(var(--margem), calc((100% - var(--largura-max)) / 2 + var(--margem)));
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+body > footer p { margin: 0 0 var(--e-1); }
+body > footer a { color: var(--cor-marca-clara); }
+body > footer small { color: var(--cor-borda); }
+@media (min-width: 768px) {
+  body > footer { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+}
