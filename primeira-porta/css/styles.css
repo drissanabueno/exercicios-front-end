@@ -1,17 +1,76 @@
-/* Tokens: mudar aqui muda o site inteiro */
+/* =========================================================
+   Primeira Porta — folha de estilos
+   EP 2: design system e layout responsivo
+   Blocos: 1 tokens e base · 2 grid e breakpoints · 3 componentes em Flexbox
+   Breakpoints (mobile first, min-width): 480 · 768 · 1024 · 1280 · 1440 px
+   ========================================================= */
+
+/* 1. Tokens: mudar aqui muda o site inteiro */
 :root {
-  --cor-fundo: #f6f7f4;
-  --cor-texto: #1f2a24;
-  --cor-marca: #2f6b4f;
-  --cor-borda: #d5dbd6;
-  --largura-max: 60rem;
+  /* Cores primárias: a marca é a única cor de ação */
+  --cor-marca: #2f6b4f;         /* marca, botão primário, links, borda de campo válido */
+  --cor-marca-escura: #255540;  /* hover e active do botão primário */
+  --cor-marca-clara: #e3eee7;   /* seções alternadas, opção selecionada, hover do botão secundário */
+
+  /* Cores secundárias: estados e destaques */
+  --cor-foco: #4c8f6e;          /* anel de foco do teclado */
+  --cor-sucesso: #3d7a2e;       /* mensagem e ícone de campo válido */
+  --cor-erro: #9b2c2c;          /* borda e mensagem de campo inválido */
+  --cor-erro-clara: #f7e8e6;    /* fundo da mensagem de erro */
+  --cor-destaque: #9c4b3a;      /* sobretítulos, datas, asterisco de obrigatório */
+
+  /* Cores neutras */
+  --cor-fundo: #f6f7f4;         /* fundo das páginas */
+  --cor-superficie: #ffffff;    /* fundo de cartões e campos */
+  --cor-borda: #d5dbd6;         /* bordas e divisores */
+  --cor-texto-suave: #4a5750;   /* legendas, datas, texto de apoio, placeholder */
+  --cor-texto: #1f2a24;         /* texto principal e rodapé escuro */
+
+  /* Tipografia: serifa herdada da marca nos títulos, sans humanista no texto */
+  --fonte-titulo: "Crimson Pro", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Escala tipográfica: valores do celular; crescem a partir de 1024 px */
+  --t-h1: 2.5rem;
+  --t-h2: 1.75rem;
+  --t-h3: 1.25rem;
+  --t-destaque: 1.125rem;
+  --t-corpo: 1rem;
+  --t-legenda: 0.875rem;
+
+  /* Espaçamento: base 8 px, escala estrita */
+  --e-1: 0.5rem;   /*  8 px: rótulo → campo, ícone → texto */
+  --e-2: 1rem;     /* 16 px: margem no celular, padding de campo, entre botões */
+  --e-3: 1.5rem;   /* 24 px: padding de cartão, entre campos */
+  --e-4: 2rem;     /* 32 px: gutter no desktop, entre grupos do formulário */
+  --e-5: 3rem;     /* 48 px: padding vertical de seção no celular, altura mínima de botão */
+  --e-6: 4rem;     /* 64 px: padding vertical de seção do tablet em diante */
+
+  /* Raio, sombra e largura */
+  --raio-1: 4px;      /* campos, botões, checkbox */
+  --raio-2: 8px;      /* cartões, blocos, mensagens */
+  --raio-pill: 999px; /* radio, tags */
+  --sombra-1: 0 1px 2px rgba(31, 42, 36, 0.08);
+  --sombra-2: 0 1px 2px rgba(31, 42, 36, 0.06), 0 8px 24px rgba(31, 42, 36, 0.10);
+  --largura-max: 75rem; /* 1200 px */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --t-h1: 3.5rem;
+    --t-h2: 2.25rem;
+    --t-h3: 1.5rem;
+    --t-destaque: 1.25rem;
+    --t-corpo: 1.125rem;
+  }
 }
 
 /* Base */
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
   line-height: 1.6;
   color: var(--cor-texto);
   background: var(--cor-fundo);
@@ -19,14 +78,32 @@ body {
 header, main, footer {
   max-width: var(--largura-max);
   margin: 0 auto;
-  padding: 1rem 1.25rem;
+  padding: var(--e-2);
 }
-h1, h2, h3 { line-height: 1.2; }
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 var(--e-2);
+}
+h1 { font-size: var(--t-h1); line-height: 1.1; letter-spacing: -0.02em; }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); font-weight: 600; line-height: 1.3; }
+p { margin: 0 0 var(--e-2); }
+small, time { font-size: var(--t-legenda); color: var(--cor-texto-suave); }
 a { color: var(--cor-marca); }
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible {
-  outline: 3px solid var(--cor-marca);
+  outline: 3px solid var(--cor-foco);
   outline-offset: 2px;
+}
+
+/* Respeita quem configurou o sistema para reduzir movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Link "pular para o conteúdo": invisível até receber foco pelo teclado */
