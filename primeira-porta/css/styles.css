@@ -537,3 +537,84 @@ input:user-valid, select:user-valid, textarea:user-valid {
   background-size: 20px 20px;
 }
 .opcao input:user-valid { background-image: none; padding-right: 0; }
+/* 6. Etiquetas, alertas e modal */
+
+/* Etiqueta (badge): categoriza o cartão de projeto */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding: 0 var(--e-1);
+  margin-bottom: var(--e-1);
+  font-size: var(--t-legenda);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--raio-pill);
+  background: var(--cor-marca-clara);
+  color: var(--cor-marca-escura);
+}
+.etiqueta--empresa { background: var(--cor-texto); color: var(--cor-fundo); }
+.etiqueta--voluntario { background: var(--cor-superficie); color: var(--cor-destaque); border: 1.5px solid var(--cor-destaque); }
+.etiqueta--doacao { background: var(--cor-sucesso); color: #fff; }
+
+/* Alerta: caixa com borda lateral colorida e um ícone feito em CSS */
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-2);
+  padding: var(--e-2) var(--e-3);
+  border: 1px solid var(--cor-marca);
+  border-left-width: 4px;
+  border-radius: var(--raio-2);
+  background: var(--cor-marca-clara);
+}
+.alerta p { margin: 0; }
+.alerta::before {
+  content: "i";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--t-legenda);
+  color: #fff;
+  background: var(--cor-marca);
+  border-radius: 50%;
+}
+.alerta--aviso { border-color: var(--cor-destaque); background: var(--cor-erro-clara); }
+.alerta--aviso::before { content: "!"; background: var(--cor-destaque); }
+.alerta--sucesso { border-color: var(--cor-sucesso); }
+.alerta--sucesso::before { content: "✓"; background: var(--cor-sucesso); }
+.alerta--erro { border-color: var(--cor-erro); background: var(--cor-erro-clara); }
+.alerta--erro::before { content: "!"; background: var(--cor-erro); }
+
+/* No cadastro, o alerta acompanha as colunas do formulário */
+@media (min-width: 768px) { main:has(> form) > .alerta { grid-column: 2 / 12; } }
+@media (min-width: 1024px) { main:has(> form) > .alerta { grid-column: 3 / 11; } }
+
+/* Modal: escondido até o link apontar para o id dele (:target); fecha com um link para outro id */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  place-items: center;
+  padding: var(--e-2);
+  background: rgba(31, 42, 36, 0.6);
+}
+.modal:target { display: grid; }
+.modal__caixa {
+  max-width: 36rem;
+  padding: var(--e-4);
+  background: var(--cor-superficie);
+  border-radius: var(--raio-2);
+  box-shadow: var(--sombra-2);
+}
+.modal__caixa h2 { margin-top: 0; font-size: var(--t-h3); }
+.modal__caixa ul { padding-left: var(--e-3); }
+.modal__caixa li { margin-bottom: var(--e-1); }
+.modal__caixa p:last-child { margin-bottom: 0; }
