@@ -496,3 +496,44 @@ body > header nav a[aria-current="page"] {
   .submenu a:hover,
   .submenu a:focus-visible { background: var(--cor-marca-clara); color: var(--cor-marca); }
 }
+
+/* 5. Estados de botão e feedback do formulário */
+
+/* Botões: hover já está no bloco 3; aqui entram active e disabled */
+.botao:active, button:active {
+  background: var(--cor-marca-escura);
+  border-color: var(--cor-marca-escura);
+  transform: translateY(1px); /* afunda 1 px ao clicar */
+}
+button[type="reset"]:active { background: var(--cor-borda); border-color: var(--cor-borda); }
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mensagem de erro: escondida até o campo ficar inválido depois de a pessoa mexer nele */
+.dica {
+  display: none;
+  margin-top: var(--e-1);
+  padding: var(--e-1) var(--e-2);
+  font-size: var(--t-legenda);
+  color: var(--cor-erro);
+  background: var(--cor-erro-clara);
+  border-left: 3px solid var(--cor-erro);
+  border-radius: 0 var(--raio-1) var(--raio-1) 0;
+}
+input:user-invalid + .dica,
+select:user-invalid + .dica,
+textarea:user-invalid + .dica { display: block; }
+
+/* Campo válido: borda verde e um check à direita, desenhado em SVG dentro do CSS */
+input:user-valid, select:user-valid, textarea:user-valid {
+  border-color: var(--cor-sucesso);
+  padding-right: var(--e-5);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%233d7a2e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--e-2) center;
+  background-size: 20px 20px;
+}
+.opcao input:user-valid { background-image: none; padding-right: 0; }
