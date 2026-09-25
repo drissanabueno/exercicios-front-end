@@ -11,15 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/svg+xml" href="img/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="imagens/logo.svg">
 </head>
 
 <body>
   <a href="#conteudo" class="pular">Pular para o conteúdo</a>
 
   <header>
-    <a href="index.html" class="marca">
-      <img src="img/logo.svg" alt="Primeira Porta" width="36" height="36">
+    <a href="#/inicio" class="marca">
+      <img src="imagens/logo.svg" alt="Primeira Porta" width="36" height="36">
       <span>Primeira Porta</span>
     </a>
     <input type="checkbox" id="menu-aberto" class="menu-controle">
@@ -29,56 +29,23 @@
     </label>
     <nav aria-label="Principal">
       <ul>
-        <li><a href="index.html" aria-current="page">Início</a></li>
+        <li><a href="#/inicio" data-rota="inicio">Início</a></li>
         <li class="tem-submenu">
-          <a href="projetos.html">Projetos</a>
+          <a href="#/projetos" data-rota="projetos">Projetos</a>
           <ul class="submenu">
-            <li><a href="projetos.html#trilha-portfolio">Trilha de portfólio</a></li>
-            <li><a href="projetos.html#selo-acessivel">Selo acessível</a></li>
-            <li><a href="projetos.html#mentoria">Mentoria</a></li>
-            <li><a href="projetos.html#apoio">Como apoiar</a></li>
+            <li><a href="#/projetos/trilha-portfolio">Trilha de portfólio</a></li>
+            <li><a href="#/projetos/selo-acessivel">Selo acessível</a></li>
+            <li><a href="#/projetos/mentoria">Mentoria</a></li>
+            <li><a href="#/projetos/apoio">Como apoiar</a></li>
           </ul>
         </li>
-        <li><a href="cadastro.html">Cadastro</a></li>
+        <li><a href="#/cadastro" data-rota="cadastro">Cadastro</a></li>
       </ul>
     </nav>
   </header>
 
-  <main id="conteudo">
-    <section id="apresentacao">
-      <h1>Ser avaliado pelo que você sabe fazer, não pelo caminho que percorreu</h1>
-      <p>A Primeira Porta é uma plataforma de empregabilidade tech inclusiva. Conectamos pessoas em início de carreira,
-        fora do padrão que o mercado espera, a vagas de entrada em tecnologia.</p>
-        <p><a href="cadastro.html" class="botao">Quero participar</a></p>
-    </section>
-
-    <section id="como-funciona">
-      <h2>Como funciona</h2>
-      <article>
-        <h3>Portfólio por competência</h3>
-        <p>No lugar do currículo, um portfólio guiado com desafios práticos e projetos de cursos. Ninguém é eliminado
-          por filtro automático.</p>
-      </article>
-      <article>
-        <h3>Empresas comprometidas</h3>
-        <p>Só entram vagas de empresas que adaptam o processo seletivo: teste sem cronômetro, entrevista acessível e
-          feedback para quem não passa.</p>
-      </article>
-      <article>
-        <h3>Tecnologia com curadoria humana</h3>
-        <p>A inteligência artificial apoia o candidato e organiza o match inicial, mas nenhuma recusa é automática. Todo
-          perfil passa por uma pessoa.</p>
-      </article>
-    </section>
-
-    <section id="numeros">
-      <h2>Por que existimos</h2>
-      <ul>
-        <li>820 mil organizações da sociedade civil no Brasil (IBGE)</li>
-        <li>Apenas 30% têm presença digital adequada</li>
-        <li>Terceiro setor emprega cerca de 3 milhões de pessoas</li>
-      </ul>
-    </section>
+  <main id="conteudo" aria-live="polite">
+    <p>Carregando…</p>
   </main>
 
   <footer>
@@ -89,6 +56,8 @@
     </address>
     <p><small>© 2026 Primeira Porta. Projeto acadêmico.</small></p>
   </footer>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
