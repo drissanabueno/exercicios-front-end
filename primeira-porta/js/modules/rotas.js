@@ -6,10 +6,12 @@
 //   #/projetos/apoio    → html/projetos.html, rolando até o id "apoio"
 //   #/cadastro          → html/cadastro.html
 
+import { renderizarProjetos } from './templates.js';
+import { iniciarFormulario } from './formulario.js';
 const ROTAS = {
   inicio: { arquivo: 'html/inicio.html', titulo: 'Primeira Porta — Empregabilidade tech inclusiva' },
-  projetos: { arquivo: 'html/projetos.html', titulo: 'Projetos — Primeira Porta' },
-  cadastro: { arquivo: 'html/cadastro.html', titulo: 'Cadastro — Primeira Porta' },
+  projetos: { arquivo: 'html/projetos.html', titulo: 'Projetos — Primeira Porta', aoCarregar: renderizarProjetos },
+    cadastro: { arquivo: 'html/cadastro.html', titulo: 'Cadastro — Primeira Porta', aoCarregar: iniciarFormulario },
 };
 
 const container = document.getElementById('conteudo');
@@ -41,6 +43,8 @@ export async function renderizar() {
 
     // innerHTML aqui é seguro: o conteúdo vem dos meus próprios arquivos em html/, não de entrada do usuário.
     container.innerHTML = html;
+        // Algumas rotas precisam gerar conteúdo depois que o fragmento entrou (ex.: os cartões de projeto)
+    if (destino.aoCarregar) destino.aoCarregar();
   } catch (erro) {
     mostrarErro(erro);
     return;

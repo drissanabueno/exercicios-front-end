@@ -313,7 +313,6 @@ textarea { min-height: 8rem; resize: vertical; }
 input::placeholder, textarea::placeholder { color: var(--cor-texto-suave); }
 input:hover, select:hover, textarea:hover { border-color: var(--cor-texto-suave); }
 input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--cor-marca); }
-input:user-valid, select:user-valid, textarea:user-valid { border-color: var(--cor-marca); }
 input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: var(--cor-erro); }
 
 /* Opção (radio ou checkbox): controle e texto alinhados; a marcada ganha fundo verde-claro */
@@ -528,7 +527,8 @@ select:user-invalid + .dica,
 textarea:user-invalid + .dica { display: block; }
 
 /* Campo válido: borda verde e um check à direita, desenhado em SVG dentro do CSS */
-input:user-valid, select:user-valid, textarea:user-valid {
+/* Estado válido: aplicado pelo JavaScript só quando o campo tem conteúdo (campo opcional vazio não ganha check) */
+input.campo-valido, select.campo-valido, textarea.campo-valido {
   border-color: var(--cor-sucesso);
   padding-right: var(--e-5);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%233d7a2e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-9'/%3E%3C/svg%3E");
@@ -536,7 +536,7 @@ input:user-valid, select:user-valid, textarea:user-valid {
   background-position: right var(--e-2) center;
   background-size: 20px 20px;
 }
-.opcao input:user-valid { background-image: none; padding-right: 0; }
+.opcao input.campo-valido { background-image: none; padding-right: 0; }
 /* 6. Etiquetas, alertas e modal */
 
 /* Etiqueta (badge): categoriza o cartão de projeto */
@@ -618,3 +618,13 @@ input:user-valid, select:user-valid, textarea:user-valid {
 .modal__caixa ul { padding-left: var(--e-3); }
 .modal__caixa li { margin-bottom: var(--e-1); }
 .modal__caixa p:last-child { margin-bottom: 0; }
+/* 7. Estados controlados por JavaScript (EP 3)
+   As classes espelham o que :user-valid/:user-invalid fazem, mas são aplicadas pelo script,
+   então funcionam também em navegadores que não conhecem essas pseudo-classes. */
+input.campo-invalido, select.campo-invalido, textarea.campo-invalido { border-color: var(--cor-erro); }
+input.campo-valido, select.campo-valido, textarea.campo-valido { border-color: var(--cor-sucesso); }
+.dica--visivel { display: block; }
+fieldset > .dica { margin-top: var(--e-2); }
+#resumo-cadastro { margin-bottom: var(--e-3); }
+@media (min-width: 768px) { main:has(> form) > #resumo-cadastro { grid-column: 2 / 12; } }
+@media (min-width: 1024px) { main:has(> form) > #resumo-cadastro { grid-column: 3 / 11; } }
