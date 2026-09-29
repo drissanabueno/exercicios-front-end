@@ -23,11 +23,11 @@
       <span>Primeira Porta</span>
     </a>
     <input type="checkbox" id="menu-aberto" class="menu-controle">
-    <label for="menu-aberto" class="menu-botao">
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
       <span class="menu-icone" aria-hidden="true"></span>
       Menu
-    </label>
-    <nav aria-label="Principal">
+    </button>
+    <nav id="menu-principal" aria-label="Principal">
       <ul>
         <li><a href="#/inicio" data-rota="inicio">Início</a></li>
         <li class="tem-submenu">
