@@ -60,6 +60,26 @@ HTML e CSS validados no W3C ao fim de cada etapa, com os resultados em `primeira
 - `etapa-2/`: o CSS no validador Jigsaw, sem erros (os avisos são só sobre `var()`, que o validador não confere)
 - `etapa-3/`: revalidação de HTML e CSS após os componentes, e prints do menu no celular e no desktop, das etiquetas, dos alertas, do modal e dos estados do formulário
 
+### Deploy
+
+O site está publicado no GitHub Pages, a partir da branch `main`:
+
+**https://drissanabueno.github.io/exercicios-front-end/primeira-porta/**
+
+Não há etapa de build: o Pages serve os arquivos como estão. O roteamento por hash e o `fetch` dos fragmentos funcionam porque todos os caminhos são relativos à pasta `primeira-porta/`. O arquivo `.nojekyll` na raiz do repositório desliga o processamento Jekyll do Pages, que poderia ignorar arquivos.
+
+Sobre otimização (issue #3): o site inteiro, sem as fontes, tem cerca de 60 KB, e o maior arquivo é o `styles.css` com 22 KB. Minificar economizaria poucos kilobytes e tiraria a legibilidade do código, que faz parte da entrega; por isso os arquivos ficam como estão. As fontes do Google já usam `display=swap`, o `preconnect` está no `head`, e os PNG do logo não são carregados pelo site (ficam só para uso externo). A medição com o Lighthouse está em `primeira-porta/docs/etapa-4/`.
+
+### Versionamento
+
+O repositório segue GitFlow simplificado desde a EP 4:
+
+- `main`: versões publicadas; é a branch que o GitHub Pages serve. Cada release recebe uma tag (`v1.0.0`).
+- `develop`: integração do que está pronto mas ainda não foi publicado.
+- `feature/*`: uma branch por funcionalidade (`feature/acessibilidade`, `feature/deploy`), aberta a partir de `develop` e devolvida por pull request.
+
+As mensagens de commit seguem o Conventional Commits em português: `feat:`, `fix:`, `docs:`, `chore:`, com escopo quando ajuda (`feat(a11y):`). As tags `ep1-entregue` e `ep2-entregue` marcam o estado do site ao fim de cada EP anterior à v1.0.0. Issues e milestones estão no próprio GitHub.
+
 ### Como ver
 
 Desde a EP 3 o site precisa de um servidor local, porque `fetch` e módulos ES não funcionam em arquivos abertos direto do disco. No VS Code, instale a extensão Live Server, abra `primeira-porta/index.html` e clique em **Go Live**; o site abre em `http://127.0.0.1:5500/primeira-porta/`. Qualquer servidor estático serve (`python -m http.server`, por exemplo).

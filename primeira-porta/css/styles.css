@@ -627,6 +627,11 @@ input.campo-valido, select.campo-valido, textarea.campo-valido {
 .modal__caixa ul { padding-left: var(--e-3); }
 .modal__caixa li { margin-bottom: var(--e-1); }
 .modal__caixa p:last-child { margin-bottom: 0; }
+/* O main reserva altura antes de o fragmento chegar, para a página não pular (layout shift) */
+main { min-height: 100vh; }
+/* O logo tem width/height no HTML, mas o height:auto geral anulava; fixa o tamanho para não mover o cabeçalho */
+.marca img { width: 36px; height: 36px; }
+
 /* 7. Estados controlados por JavaScript (EP 3)
    As classes espelham o que :user-valid/:user-invalid fazem, mas são aplicadas pelo script,
    então funcionam também em navegadores que não conhecem essas pseudo-classes. */
