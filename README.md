@@ -1,20 +1,22 @@
 # Exercícios de Front-end
 
-Experiências práticas da disciplina **Desenvolvimento Front-end para Web** (Engenharia de Software, Universidade Positivo, 2026). Uma pasta por exercício, HTML e CSS puros, sem framework: o objetivo aqui é dominar o fundamento que os frameworks usam por baixo.
+Experiências práticas da disciplina **Desenvolvimento Front-end para Web** (Engenharia de Software, Universidade Positivo, 2026). Uma pasta por exercício, HTML, CSS e JavaScript puros, sem framework: o objetivo aqui é dominar o fundamento que os frameworks usam por baixo.
 
 ## Exercícios
 
 | Pasta | Tema | Status |
 |---|---|---|
-| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback | EP 1 entregue (1,0) · EP 2 entregue |
+| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback · EP 3: SPA com roteamento por hash, templates, validação em JavaScript, localStorage e módulos ES | EP 1 entregue (1,0) · EP 2 entregue (1,0) · EP 3 entregue |
 
-## Primeira Porta (EP 1 e EP 2)
+## Primeira Porta (EP 1, EP 2 e EP 3)
 
 Site institucional de uma ONG fictícia de empregabilidade tech inclusiva (projeto que criei na disciplina de Design Profissional). Três páginas:
 
-- `index.html`: apresentação, com hierarquia `h1` → `h2` → `h3` e seções semânticas
-- `projetos.html`: iniciativas sociais em `article`, cada um com `header`, `time` e uma etiqueta de categoria
-- `cadastro.html`: formulário de candidatos, voluntários e doadores
+- Início: apresentação, com hierarquia `h1` → `h2` → `h3` e seções semânticas
+- Projetos: iniciativas sociais em `article`, cada um com `header`, `time` e uma etiqueta de categoria
+- Cadastro: formulário de candidatos, voluntários e doadores
+
+Desde a EP 3 o site é uma SPA: existe um único `index.html`, e o conteúdo de cada tela fica em `html/` e é carregado pelo JavaScript.
 
 ### EP 1 — estrutura (HTML)
 
@@ -33,6 +35,23 @@ Todo o estilo está em [`css/styles.css`](primeira-porta/css/styles.css), organi
 
 Acessibilidade que atravessa tudo: foco de teclado sempre visível, contraste AA verificado, `prefers-reduced-motion` desligando as transições, mensagens de erro ligadas ao campo por `aria-describedby`.
 
+### EP 3 — comportamento (JavaScript)
+
+Estrutura de pastas exigida pelo roteiro: `html/` (fragmentos das três telas), `css/`, `imagens/` e `js/`. O JavaScript fica em oito arquivos, cada um com uma responsabilidade:
+
+| Arquivo | O que faz |
+|---|---|
+| `js/main.js` | Ponto de entrada; liga `hashchange` e `DOMContentLoaded` |
+| `js/modules/rotas.js` | Roteamento por hash (`#/inicio`, `#/projetos`, `#/cadastro`): busca o fragmento com `fetch`, injeta no `main`, marca o link ativo, cuida do foco |
+| `js/modules/templates.js` | Gera os cartões de projeto clonando um `<template>` do HTML |
+| `js/dados/projetos.js` | Lista com os dados dos projetos, sem HTML |
+| `js/modules/formulario.js` | Validação com `checkValidity()` e `validity`, mensagens por tipo de erro, resumo acima do formulário |
+| `js/modules/armazenamento.js` | Rascunho salvo a cada tecla e histórico de cadastros no `localStorage` |
+| `js/modules/modal.js` | Modal com delegação de evento no `main`, fecha com Esc e devolve o foco |
+| `js/modules/mascaras.js` | Máscaras de CPF, telefone e CEP com a biblioteca IMask (CDN) |
+
+Os módulos não importam uns aos outros: o formulário dispara um evento próprio (`cadastro:enviado`) que o armazenamento escuta, e o modal reage a atributos `data-modal-abrir` em qualquer elemento. Só o roteador conhece as funções de cada tela.
+
 ### Validação
 
 HTML e CSS validados no W3C ao fim de cada etapa, com os resultados em `primeira-porta/docs/`:
@@ -43,7 +62,11 @@ HTML e CSS validados no W3C ao fim de cada etapa, com os resultados em `primeira
 
 ### Como ver
 
-Abra `primeira-porta/index.html` no navegador. Não precisa de servidor. Para o menu hambúrguer, estreite a janela abaixo de 768 px ou use o modo celular das ferramentas do desenvolvedor.
+Desde a EP 3 o site precisa de um servidor local, porque `fetch` e módulos ES não funcionam em arquivos abertos direto do disco. No VS Code, instale a extensão Live Server, abra `primeira-porta/index.html` e clique em **Go Live**; o site abre em `http://127.0.0.1:5500/primeira-porta/`. Qualquer servidor estático serve (`python -m http.server`, por exemplo).
+
+Para ver o site como estava ao fim de cada EP, use as tags `ep1-entregue` e `ep2-entregue` (nessas versões o `index.html` abre direto do disco).
+
+Para o menu hambúrguer, estreite a janela abaixo de 768 px ou use o modo celular das ferramentas do desenvolvedor.
 
 ## Autora
 
