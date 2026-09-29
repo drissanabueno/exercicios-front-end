@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/svg+xml" href="imagens/logo.svg">
   <meta name="theme-color" content="#2f6b4f">
+  <meta name="color-scheme" content="light dark">
 </head>
 
 <body>
@@ -20,7 +21,10 @@
 
   <header>
     <a href="#/inicio" class="marca">
-      <img src="imagens/logo.svg" alt="Primeira Porta" width="36" height="36">
+      <picture>
+        <source srcset="imagens/logo-escuro.svg" media="(prefers-color-scheme: dark)">
+        <img src="imagens/logo.svg" alt="Primeira Porta" width="36" height="36">
+      </picture>
       <span>Primeira Porta</span>
     </a>
     <input type="checkbox" id="menu-aberto" class="menu-controle" aria-label="Abrir menu (reserva sem JavaScript)" tabindex="-1">
