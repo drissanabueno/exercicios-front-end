@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/svg+xml" href="imagens/logo.svg">
+  <meta name="theme-color" content="#2f6b4f">
 </head>
 
 <body>
@@ -22,12 +23,12 @@
       <img src="imagens/logo.svg" alt="Primeira Porta" width="36" height="36">
       <span>Primeira Porta</span>
     </a>
-    <input type="checkbox" id="menu-aberto" class="menu-controle">
-    <label for="menu-aberto" class="menu-botao">
+    <input type="checkbox" id="menu-aberto" class="menu-controle" aria-label="Abrir menu (reserva sem JavaScript)" tabindex="-1">
+    <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal">
       <span class="menu-icone" aria-hidden="true"></span>
       Menu
-    </label>
-    <nav aria-label="Principal">
+    </button>
+    <nav id="menu-principal" aria-label="Principal">
       <ul>
         <li><a href="#/inicio" data-rota="inicio">Início</a></li>
         <li class="tem-submenu">

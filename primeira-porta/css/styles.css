@@ -399,11 +399,14 @@ body > footer small { color: var(--cor-borda); }
   box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; /* as três linhas */
 }
 .menu-controle:focus-visible + .menu-botao { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
-.menu-controle:checked + .menu-botao { background: var(--cor-marca-clara); border-color: var(--cor-marca); }
+.menu-botao { font: inherit; color: var(--cor-texto); }
+.menu-controle:checked + .menu-botao,
+.menu-botao[aria-expanded="true"] { background: var(--cor-marca-clara); border-color: var(--cor-marca); }
 
 /* Celular: o menu começa fechado; ao marcar o checkbox, aparece em coluna, na largura toda */
 body > header nav { display: none; width: 100%; }
-.menu-controle:checked ~ nav { display: block; }
+.menu-controle:checked ~ nav,
+nav.menu--aberto { display: block; }
 body > header nav ul {
   flex-direction: column;
   align-items: stretch;
@@ -434,7 +437,8 @@ body > header nav a[aria-current="page"] {
 @media (min-width: 768px) {
   .menu-botao { display: none; }
   body > header nav,
-  .menu-controle:checked ~ nav { display: block; width: auto; }
+  .menu-controle:checked ~ nav,
+  nav.menu--aberto { display: block; width: auto; }
   body > header nav ul {
     flex-direction: row;
     align-items: center;
@@ -623,6 +627,11 @@ input.campo-valido, select.campo-valido, textarea.campo-valido {
 .modal__caixa ul { padding-left: var(--e-3); }
 .modal__caixa li { margin-bottom: var(--e-1); }
 .modal__caixa p:last-child { margin-bottom: 0; }
+/* O main reserva altura antes de o fragmento chegar, para a página não pular (layout shift) */
+main { min-height: 100vh; }
+/* O logo tem width/height no HTML, mas o height:auto geral anulava; fixa o tamanho para não mover o cabeçalho */
+.marca img { width: 36px; height: 36px; }
+
 /* 7. Estados controlados por JavaScript (EP 3)
    As classes espelham o que :user-valid/:user-invalid fazem, mas são aplicadas pelo script,
    então funcionam também em navegadores que não conhecem essas pseudo-classes. */

@@ -10,6 +10,7 @@ import { renderizarProjetos } from './templates.js';
 import { iniciarFormulario } from './formulario.js';
 import { iniciarArmazenamento } from './armazenamento.js';
 import { iniciarMascaras } from './mascaras.js';
+import { definirMenu } from './menu.js';
 const ROTAS = {
   inicio: { arquivo: 'html/inicio.html', titulo: 'Primeira Porta — Empregabilidade tech inclusiva' },
   projetos: { arquivo: 'html/projetos.html', titulo: 'Projetos — Primeira Porta', aoCarregar: renderizarProjetos },
@@ -85,6 +86,7 @@ function marcarLinkAtivo(rota) {
 function fecharMenuCelular() {
   const controle = document.getElementById('menu-aberto');
   if (controle) controle.checked = false;
+  definirMenu(false);
 }
 
 // Mensagens montadas com createElement e textContent, sem innerHTML, porque o nome da rota vem da URL.
