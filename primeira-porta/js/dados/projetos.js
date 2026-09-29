@@ -36,6 +36,6 @@ export const projetos = [
     local: 'Doações de pessoas e empresas · sem valor mínimo',
     descricao: 'Cada real vai para três coisas: bolsa de conectividade para quem não tem internet estável, remuneração dos testes de acessibilidade com pessoas com deficiência e infraestrutura da plataforma.',
     chamada: { rotulo: 'Como doar:', link: { href: '#/cadastro', texto: 'cadastre-se como doador' }, texto: ' e entramos em contato com as formas de contribuição.' },
-    extra: { href: '#modal-doacao', texto: 'Ver em detalhe para onde vai cada real' },
+    extra: { href: '#modal-doacao', modal: 'modal-doacao', texto: 'Ver em detalhe para onde vai cada real' },
   },
 ];

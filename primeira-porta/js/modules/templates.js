@@ -50,6 +50,7 @@ export function renderizarProjetos() {
       const a = extra.querySelector('a');
       a.href = projeto.extra.href;
       a.textContent = projeto.extra.texto;
+      if (projeto.extra.modal) a.dataset.modalAbrir = projeto.extra.modal;
     } else {
       extra.remove();
     }

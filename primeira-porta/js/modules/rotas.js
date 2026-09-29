@@ -8,10 +8,11 @@
 
 import { renderizarProjetos } from './templates.js';
 import { iniciarFormulario } from './formulario.js';
+import { iniciarArmazenamento } from './armazenamento.js';
 const ROTAS = {
   inicio: { arquivo: 'html/inicio.html', titulo: 'Primeira Porta — Empregabilidade tech inclusiva' },
   projetos: { arquivo: 'html/projetos.html', titulo: 'Projetos — Primeira Porta', aoCarregar: renderizarProjetos },
-    cadastro: { arquivo: 'html/cadastro.html', titulo: 'Cadastro — Primeira Porta', aoCarregar: iniciarFormulario },
+  cadastro: { arquivo: 'html/cadastro.html', titulo: 'Cadastro — Primeira Porta', aoCarregar: () => { iniciarFormulario(); iniciarArmazenamento(); } },
 };
 
 const container = document.getElementById('conteudo');

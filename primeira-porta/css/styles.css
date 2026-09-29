@@ -607,6 +607,11 @@ input.campo-valido, select.campo-valido, textarea.campo-valido {
   background: rgba(31, 42, 36, 0.6);
 }
 .modal:target { display: grid; }
+.modal--aberto { display: grid; }
+#historico-cadastros { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); margin: 0; }
+#historico-cadastros button { min-height: 2rem; padding: 0 var(--e-2); font-size: var(--t-legenda); }
+@media (min-width: 768px) { main:has(> form) > #historico-cadastros { grid-column: 2 / 12; } }
+@media (min-width: 1024px) { main:has(> form) > #historico-cadastros { grid-column: 3 / 11; } }
 .modal__caixa {
   max-width: 36rem;
   padding: var(--e-4);
