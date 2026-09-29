@@ -6,9 +6,9 @@ Experiências práticas da disciplina **Desenvolvimento Front-end para Web** (En
 
 | Pasta | Tema | Status |
 |---|---|---|
-| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback · EP 3: SPA com roteamento por hash, templates, validação em JavaScript, localStorage e módulos ES | EP 1 entregue (1,0) · EP 2 entregue (1,0) · EP 3 entregue |
+| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback · EP 3: SPA com roteamento por hash, templates, validação em JavaScript, localStorage e módulos ES · EP 4: GitFlow, pull requests, revisão WCAG 2.1 AA e deploy no GitHub Pages | EP 1 entregue (1,0) · EP 2 entregue (1,0) · EP 3 entregue · EP 4 entregue |
 
-## Primeira Porta (EP 1, EP 2 e EP 3)
+## Primeira Porta (EP 1 a EP 4)
 
 Site institucional de uma ONG fictícia de empregabilidade tech inclusiva (projeto que criei na disciplina de Design Profissional). Três páginas:
 
@@ -16,7 +16,7 @@ Site institucional de uma ONG fictícia de empregabilidade tech inclusiva (proje
 - Projetos: iniciativas sociais em `article`, cada um com `header`, `time` e uma etiqueta de categoria
 - Cadastro: formulário de candidatos, voluntários e doadores
 
-Desde a EP 3 o site é uma SPA: existe um único `index.html`, e o conteúdo de cada tela fica em `html/` e é carregado pelo JavaScript.
+Desde a EP 3 o site é uma SPA: existe um único `index.html`, e o conteúdo de cada tela fica em `html/` e é carregado pelo JavaScript. Desde a EP 4 ele está publicado: **https://drissanabueno.github.io/exercicios-front-end/primeira-porta/**
 
 ### EP 1 — estrutura (HTML)
 
@@ -51,6 +51,13 @@ Estrutura de pastas exigida pelo roteiro: `html/` (fragmentos das três telas), 
 | `js/modules/mascaras.js` | Máscaras de CPF, telefone e CEP com a biblioteca IMask (CDN) |
 
 Os módulos não importam uns aos outros: o formulário dispara um evento próprio (`cadastro:enviado`) que o armazenamento escuta, e o modal reage a atributos `data-modal-abrir` em qualquer elemento. Só o roteador conhece as funções de cada tela.
+
+### EP 4 — versionamento, acessibilidade e deploy
+
+- **GitFlow**: `main` publicada, `develop` de integração, `feature/acessibilidade` e `feature/deploy` devolvidas por pull request (#4, #5) e release `v1.0.0` pelo PR #6. Três issues com milestone "EP 4".
+- **Acessibilidade**: o botão do menu hambúrguer ganhou `aria-expanded` e `aria-controls` (novo `js/modules/menu.js`), fecha com Esc e devolve o foco; o checkbox reserva saiu da ordem do teclado. Lighthouse de acessibilidade: 94 → 100.
+- **Otimização**: `main` reserva altura antes de o fragmento chegar e o logo tem tamanho fixo, o que levou o Cumulative Layout Shift de 0,845 para 0,001 e a performance de 75 para 99. Minificação foi avaliada e descartada, com os números na seção Deploy.
+- **Deploy**: GitHub Pages a partir da `main`, com `.nojekyll`. Lighthouse no site publicado: 98 / 100 / 100 / 100 (`docs/etapa-4/`).
 
 ### Validação
 
