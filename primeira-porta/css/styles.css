@@ -24,7 +24,11 @@
   --cor-superficie: #ffffff;    /* fundo de cartões e campos */
   --cor-borda: #d5dbd6;         /* bordas e divisores */
   --cor-texto-suave: #4a5750;   /* legendas, datas, texto de apoio, placeholder */
-  --cor-texto: #1f2a24;         /* texto principal e rodapé escuro */
+  --cor-texto: #1f2a24;         /* texto principal */
+  --cor-rodape-fundo: #1f2a24;  /* rodapé (escuro nos dois modos) */
+  --cor-rodape-texto: #f6f7f4;
+  --cor-rodape-link: #e3eee7;
+  --cor-rodape-suave: #d5dbd6;
 
   /* Tipografia: serifa herdada da marca nos títulos, sans humanista no texto */
   --fonte-titulo: "Crimson Pro", Georgia, "Times New Roman", serif;
@@ -53,6 +57,32 @@
   --sombra-1: 0 1px 2px rgba(31, 42, 36, 0.08);
   --sombra-2: 0 1px 2px rgba(31, 42, 36, 0.06), 0 8px 24px rgba(31, 42, 36, 0.10);
   --largura-max: 75rem; /* 1200 px */
+}
+
+/* Modo escuro: só os tokens de cor mudam; layout, componentes e regras continuam iguais.
+   Cada par texto/fundo foi conferido no WebAIM Contrast Checker (mínimo AA: 4,5:1 texto, 3:1 interface). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-marca: #8fc4a8;         /* links e borda válida: 8,8:1 sobre o fundo */
+    --cor-marca-escura: #6fb08f;
+    --cor-marca-clara: #22352b;   /* seção "Como funciona", opção marcada: texto 10,8:1 */
+    --cor-foco: #6fb08f;          /* anel de foco: 6,9:1 sobre o fundo */
+    --cor-sucesso: #8fd07b;       /* 8,3:1 sobre cartão */
+    --cor-erro: #f0a3a3;          /* 7,6:1 sobre cartão */
+    --cor-erro-clara: #3a2323;
+    --cor-destaque: #d99a8a;      /* datas dos cartões: 6,4:1 */
+    --cor-fundo: #151b18;
+    --cor-superficie: #1f2823;    /* cartões e campos */
+    --cor-borda: #3a463f;
+    --cor-texto-suave: #a9b4ad;   /* 8,2:1 sobre o fundo */
+    --cor-texto: #e8ebe6;         /* 14,5:1 sobre o fundo, 12,5:1 sobre cartão */
+    --cor-rodape-fundo: #0f1412;
+    --cor-rodape-texto: #e8ebe6;
+    --cor-rodape-link: #8fc4a8;
+    --cor-rodape-suave: #a9b4ad;
+    --sombra-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --sombra-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -351,12 +381,12 @@ body > footer {
   padding-top: var(--e-5);
   padding-bottom: var(--e-5);
   padding-inline: max(var(--margem), calc((100% - var(--largura-max)) / 2 + var(--margem)));
-  background: var(--cor-texto);
-  color: var(--cor-fundo);
+  background: var(--cor-rodape-fundo);
+  color: var(--cor-rodape-texto);
 }
 body > footer p { margin: 0 0 var(--e-1); }
-body > footer a { color: var(--cor-marca-clara); }
-body > footer small { color: var(--cor-borda); }
+body > footer a { color: var(--cor-rodape-link); }
+body > footer small { color: var(--cor-rodape-suave); }
 @media (min-width: 768px) {
   body > footer { flex-direction: row; justify-content: space-between; align-items: flex-end; }
 }
@@ -642,3 +672,12 @@ fieldset > .dica { margin-top: var(--e-2); }
 #resumo-cadastro { margin-bottom: var(--e-3); }
 @media (min-width: 768px) { main:has(> form) > #resumo-cadastro { grid-column: 2 / 12; } }
 @media (min-width: 1024px) { main:has(> form) > #resumo-cadastro { grid-column: 3 / 11; } }
+
+/* Modo escuro, ajustes de componente. Ficam no fim do arquivo para vencerem as regras base
+   de mesma especificidade (a cascata decide pelo que vem por último). */
+@media (prefers-color-scheme: dark) {
+  .botao, button:not([type="reset"]), .etiqueta--doacao { background: #2f6b4f; border-color: #2f6b4f; color: #fff; }
+  .botao:hover, button:not([type="reset"]):hover, .botao:active, button:not([type="reset"]):active { background: #255540; border-color: #255540; }
+  .etiqueta { background: var(--cor-marca-clara); color: var(--cor-marca); }
+  .alerta::before { color: var(--cor-fundo); }
+}
