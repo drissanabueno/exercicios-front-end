@@ -75,7 +75,16 @@ O site está publicado no GitHub Pages, a partir da branch `main`:
 
 Não há etapa de build: o Pages serve os arquivos como estão. O roteamento por hash e o `fetch` dos fragmentos funcionam porque todos os caminhos são relativos à pasta `primeira-porta/`. O arquivo `.nojekyll` na raiz do repositório desliga o processamento Jekyll do Pages, que poderia ignorar arquivos.
 
-Sobre otimização (issue #3): o site inteiro, sem as fontes, tem cerca de 60 KB, e o maior arquivo é o `styles.css` com 22 KB. Minificar economizaria poucos kilobytes e tiraria a legibilidade do código, que faz parte da entrega; por isso os arquivos ficam como estão. As fontes do Google já usam `display=swap`, o `preconnect` está no `head`, e os PNG do logo não são carregados pelo site (ficam só para uso externo). A medição com o Lighthouse está em `primeira-porta/docs/etapa-4/`.
+Sobre otimização (issue #3): existe um build de produção, `npm install` e `npm run build`, que copia `primeira-porta/` para `dist/` minificando CSS (lightningcss), JavaScript (terser, em modo módulo) e HTML (html-minifier-terser), mantendo os nomes dos arquivos para os `import` relativos continuarem válidos. Não há bundler porque não há o que empacotar: o navegador lê os módulos ES direto.
+
+| | Original | Minificado | Redução |
+|---|---|---|---|
+| CSS | 24,8 KB | 15,0 KB | 39% |
+| JavaScript (9 arquivos) | 23,6 KB | 11,8 KB | 50% |
+| HTML (index + 3 fragmentos) | 10,9 KB | 9,3 KB | 14% |
+| Total | 59,3 KB | 36,2 KB | 39% |
+
+O `dist/` foi testado com o Lighthouse (100 / 100 / 100 / 100, sem erro de console). Mesmo assim, o que o GitHub Pages serve é a pasta `primeira-porta/` legível: o Pages já entrega tudo com gzip, o ganho real na rede fica em torno de 8 KB, e o código legível no endereço público faz parte do que este repositório quer mostrar. O `dist/` não é versionado (está no `.gitignore`). As fontes do Google já usam `display=swap`, o `preconnect` está no `head`, e os PNG do logo não são carregados pelo site (ficam só para uso externo). A medição com o Lighthouse está em `primeira-porta/docs/etapa-4/`.
 
 ### Versionamento
 
