@@ -1,0 +1,15 @@
+{
+  "name": "exercicios-front-end",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Exercícios da disciplina Desenvolvimento Front-end para Web (UP, 2026). Sem bundler: o site é HTML, CSS e JS puros; o script de build só minifica.",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "npx --yes serve dist -l 8080"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "lightningcss-cli": "^1.27.0",
+    "terser": "^5.36.0"
+  }
+}
