@@ -6,7 +6,7 @@ Experiências práticas da disciplina **Desenvolvimento Front-end para Web** (En
 
 | Pasta | Tema | Status |
 |---|---|---|
-| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback · EP 3: SPA com roteamento por hash, templates, validação em JavaScript, localStorage e módulos ES · EP 4: GitFlow, pull requests, revisão WCAG 2.1 AA e deploy no GitHub Pages | EP 1 entregue (1,0) · EP 2 entregue (1,0) · EP 3 entregue · EP 4 entregue |
+| [`primeira-porta`](primeira-porta/) | EP 1: HTML5 semântico e formulários com validação nativa · EP 2: design system em variáveis CSS, Grid de 12 colunas, Flexbox, menu responsivo e componentes de feedback · EP 3: SPA com roteamento por hash, templates, validação em JavaScript, localStorage e módulos ES · EP 4: GitFlow, pull requests, revisão WCAG 2.1 AA e deploy no GitHub Pages | As quatro EPs entregues, nota 1,0 em cada (4,0 de 4,0) |
 
 ## Primeira Porta (EP 1 a EP 4)
 
@@ -54,9 +54,10 @@ Os módulos não importam uns aos outros: o formulário dispara um evento própr
 
 ### EP 4 — versionamento, acessibilidade e deploy
 
-- **GitFlow**: `main` publicada, `develop` de integração, `feature/acessibilidade` e `feature/deploy` devolvidas por pull request (#4, #5) e release `v1.0.0` pelo PR #6. Três issues com milestone "EP 4".
+- **GitFlow**: `main` publicada, `develop` de integração e uma branch `feature/*` por funcionalidade (acessibilidade, deploy, modo escuro, build), todas devolvidas por pull request. Dez PRs, três issues com milestone "EP 4" e três releases: `v1.0.0` (primeira versão publicada), `v1.1.0` (modo escuro) e `v1.2.0` (build de produção).
 - **Acessibilidade**: o botão do menu hambúrguer ganhou `aria-expanded` e `aria-controls` (novo `js/modules/menu.js`), fecha com Esc e devolve o foco; o checkbox reserva saiu da ordem do teclado. Lighthouse de acessibilidade: 94 → 100.
-- **Otimização**: `main` reserva altura antes de o fragmento chegar e o logo tem tamanho fixo, o que levou o Cumulative Layout Shift de 0,845 para 0,001 e a performance de 75 para 99. Minificação foi avaliada e descartada, com os números na seção Deploy.
+- **Modo escuro**: os tokens de cor são redefinidos em `prefers-color-scheme: dark`, sem tocar em componente; cada par texto/fundo foi conferido no WebAIM (o mais apertado, 5,2:1). O logo tem uma versão clara servida por `<picture>`.
+- **Otimização**: `main` reserva altura antes de o fragmento chegar e o logo tem tamanho fixo, o que levou o Cumulative Layout Shift de 0,845 para 0,001 e a performance de 75 para 99. Há um build de produção (`npm run build`) que minifica e mede; os números e a decisão de servir o código legível estão na seção Deploy.
 - **Deploy**: GitHub Pages a partir da `main`, com `.nojekyll`. Lighthouse no site publicado: 98 / 100 / 100 / 100 (`docs/etapa-4/`).
 
 ### Validação
@@ -92,7 +93,7 @@ O repositório segue GitFlow simplificado desde a EP 4:
 
 - `main`: versões publicadas; é a branch que o GitHub Pages serve. Cada release recebe uma tag (`v1.0.0`).
 - `develop`: integração do que está pronto mas ainda não foi publicado.
-- `feature/*`: uma branch por funcionalidade (`feature/acessibilidade`, `feature/deploy`), aberta a partir de `develop` e devolvida por pull request.
+- `feature/*`: uma branch por funcionalidade (`feature/acessibilidade`, `feature/deploy`, `feature/modo-escuro`, `feature/build`), aberta a partir de `develop` e devolvida por pull request.
 
 As mensagens de commit seguem o Conventional Commits em português: `feat:`, `fix:`, `docs:`, `chore:`, com escopo quando ajuda (`feat(a11y):`). As tags `ep1-entregue` e `ep2-entregue` marcam o estado do site ao fim de cada EP anterior à v1.0.0. Issues e milestones estão no próprio GitHub.
 
