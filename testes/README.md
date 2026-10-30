@@ -4,7 +4,18 @@ Cenários de teste do formulário da [Primeira Porta](https://drissanabueno.gith
 
 Estão separados em fluxo principal (cadastro que dá certo), fluxos alternativos (campos opcionais, máscara, rascunho salvo, botão Limpar) e exceções (formulário vazio, formato errado, data fora do limite).
 
-Depois de escrever os cenários, transformei cada um em teste automático com Playwright, em [`cadastro.spec.js`](cadastro.spec.js). Os testes têm o mesmo nome dos cenários e rodam duas vezes, numa tela de computador e numa de celular (28 no total).
+Depois de escrever os cenários, transformei cada um em teste automático com Playwright, em [`cadastro.spec.js`](cadastro.spec.js). Os testes têm o mesmo nome dos cenários e rodam duas vezes, numa tela de computador e numa de celular (28 testes de tela).
+
+## Testes de API
+
+O formulário pede CEP, cidade e estado. A API pública do [ViaCEP](https://viacep.com.br) devolve a cidade e o estado a partir do CEP, então antes de pensar em usar ela no site eu testei como ela responde. Os cenários estão em [`api-viacep.feature`](api-viacep.feature) e os testes em [`api-viacep.spec.js`](api-viacep.spec.js). Eles fazem as requisições HTTP direto, sem abrir navegador, e conferem status, formato da resposta e campos (7 testes).
+
+Duas coisas que valem saber antes de usar essa API:
+
+- Um CEP no formato certo mas que não existe não volta 404. Volta 200 com `{ "erro": "true" }`, então o site precisa olhar o corpo da resposta, não só o status.
+- O `erro` vem como texto (`"true"`, entre aspas) e não como booleano. Um `if (dados.erro === true)` nunca seria verdadeiro.
+
+Formato errado (poucos dígitos, letra, dígito a mais) volta 400, e um POST volta 405.
 
 ## Como rodar
 
