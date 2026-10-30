@@ -4,6 +4,18 @@ Cenários de teste do formulário da [Primeira Porta](https://drissanabueno.gith
 
 Estão separados em fluxo principal (cadastro que dá certo), fluxos alternativos (campos opcionais, máscara, rascunho salvo, botão Limpar) e exceções (formulário vazio, formato errado, data fora do limite).
 
+Depois de escrever os cenários, transformei cada um em teste automático com Playwright, em [`cadastro.spec.js`](cadastro.spec.js). Os testes têm o mesmo nome dos cenários e rodam duas vezes, numa tela de computador e numa de celular (28 no total).
+
+## Como rodar
+
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+Por padrão os testes abrem o site publicado. Para testar uma cópia local, rode com `BASE_URL=http://127.0.0.1:5500/primeira-porta/ npm test`. O relatório fica em `playwright-report/` (`npx playwright show-report`).
+
 ## O que encontrei
 
 **1. Estado em letra minúscula é recusado.** Se a pessoa digita "pr", o campo fica com erro e pede "Sigla com duas letras maiúsculas". Funciona, mas obriga a pessoa a corrigir uma coisa que o site podia resolver sozinho, convertendo para maiúscula enquanto ela digita, do mesmo jeito que a máscara já faz com o CPF.

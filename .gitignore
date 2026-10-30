@@ -8,3 +8,7 @@ Thumbs.db
 # Build de produção (gerado por npm run build)
 dist/
 node_modules/
+
+# Testes (gerado por npx playwright test)
+test-results/
+playwright-report/
