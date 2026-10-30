@@ -97,6 +97,10 @@ O repositório segue GitFlow simplificado desde a EP 4:
 
 As mensagens de commit seguem o Conventional Commits em português: `feat:`, `fix:`, `docs:`, `chore:`, com escopo quando ajuda (`feat(a11y):`). As tags `ep1-entregue` e `ep2-entregue` marcam o estado do site ao fim de cada EP anterior à v1.0.0. Issues e milestones estão no próprio GitHub.
 
+### Testes
+
+Os cenários de teste do formulário de cadastro estão em [`testes/cadastro.feature`](testes/cadastro.feature), escritos em Gherkin: fluxo principal, fluxos alternativos e exceções. Cada cenário virou um teste automático com Playwright ([`testes/cadastro.spec.js`](testes/cadastro.spec.js)), que roda no desktop e no celular com `npm test`. Os dois problemas que encontrei testando estão em [`testes/README.md`](testes/README.md).
+
 ### Como ver
 
 Desde a EP 3 o site precisa de um servidor local, porque `fetch` e módulos ES não funcionam em arquivos abertos direto do disco. No VS Code, instale a extensão Live Server, abra `primeira-porta/index.html` e clique em **Go Live**; o site abre em `http://127.0.0.1:5500/primeira-porta/`. Qualquer servidor estático serve (`python -m http.server`, por exemplo).
