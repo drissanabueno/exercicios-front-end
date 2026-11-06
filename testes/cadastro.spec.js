@@ -68,6 +68,14 @@ test.describe('Fluxos alternativos', () => {
     await expect(page.getByLabel('CEP')).toHaveValue('80000-000');
   });
 
+  test('Estado digitado em minúscula vira maiúscula', async ({ page }) => {
+    await digitar(page, 'Estado', 'pr');
+    await page.getByLabel('Estado').blur();
+
+    await expect(page.getByLabel('Estado')).toHaveValue('PR');
+    await expect(page.getByLabel('Estado')).not.toHaveClass(/campo-invalido/);
+  });
+
   test('O que eu digitei volta depois de recarregar a página', async ({ page }) => {
     await digitar(page, 'Nome completo', 'Ana');
     await page.reload();
@@ -105,7 +113,7 @@ test.describe('Exceções', () => {
     { campo: 'CPF', id: 'cpf', valor: '12345', mensagem: 'Formato: 000.000.000-00' },
     { campo: 'Telefone celular', id: 'telefone', valor: '4199', mensagem: 'Formato: (00) 00000-0000' },
     { campo: 'CEP', id: 'cep', valor: '800', mensagem: 'Formato: 00000-000' },
-    { campo: 'Estado', id: 'estado', valor: 'pr', mensagem: 'Sigla com duas letras maiúsculas' },
+    { campo: 'Estado', id: 'estado', valor: 'P1', mensagem: 'Sigla com duas letras maiúsculas' },
   ];
 
   for (const { campo, id, valor, mensagem } of formatoErrado) {
@@ -122,7 +130,7 @@ test.describe('Exceções', () => {
     await page.getByLabel('Data de nascimento').fill('2015-01-01');
     await page.getByLabel('Data de nascimento').blur();
 
-    await expect(dicaDe(page, 'nascimento')).toHaveText('A data precisa ser até 2010-12-31.');
+    await expect(dicaDe(page, 'nascimento')).toHaveText('A data precisa ser até 31/12/2010.');
   });
 
   test('A mensagem de erro some quando corrijo o campo', async ({ page }) => {

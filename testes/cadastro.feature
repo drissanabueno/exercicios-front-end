@@ -42,6 +42,12 @@ Funcionalidade: Cadastro na Primeira Porta
     E o campo "Telefone celular" mostra "(41) 99999-0000"
     E o campo "CEP" mostra "80000-000"
 
+  Cenário: Estado digitado em minúscula vira maiúscula
+    Quando digito "pr" no campo "Estado"
+    E saio do campo
+    Então o campo "Estado" mostra "PR"
+    E o campo "Estado" não fica marcado com erro
+
   Cenário: O que eu digitei volta depois de recarregar a página
     Dado que digitei "Ana" no campo "Nome completo"
     Quando recarrego a página
@@ -77,12 +83,12 @@ Funcionalidade: Cadastro na Primeira Porta
       | CPF              | 12345         | Formato: 000.000.000-00                             |
       | Telefone celular | 4199          | Formato: (00) 00000-0000                            |
       | CEP              | 800           | Formato: 00000-000                                  |
-      | Estado           | pr            | Sigla com duas letras maiúsculas                    |
+      | Estado           | P1            | Sigla com duas letras maiúsculas                    |
 
   Cenário: Data de nascimento depois do limite
     Quando preencho "Data de nascimento" com "01/01/2015"
     E saio do campo
-    Então vejo a mensagem "A data precisa ser até 2010-12-31."
+    Então vejo a mensagem "A data precisa ser até 31/12/2010."
 
   Cenário: A mensagem de erro some quando corrijo o campo
     Dado que o campo "E-mail" está marcado com erro
