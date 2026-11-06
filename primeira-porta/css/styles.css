@@ -499,7 +499,7 @@ body > header nav a[aria-current="page"] {
     position: absolute;
     display: block;
     top: 100%;
-    left: 0;
+    right: 0; /* cresce para a esquerda: "Projetos" fica perto da borda direita da tela */
     z-index: 10;
     min-width: 14rem;
     margin: 0;
