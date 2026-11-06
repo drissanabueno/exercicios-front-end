@@ -9,8 +9,10 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'https://drissanabueno.github.io/exercicios-front-end/primeira-porta/',
     screenshot: 'only-on-failure',
   },
+  // Os testes de tela rodam em dois tamanhos; os de API não usam tela, então rodam uma vez só
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
-    { name: 'celular', use: { ...devices['Pixel 7'] } },
+    { name: 'desktop', testMatch: 'cadastro.spec.js', use: { ...devices['Desktop Chrome'] } },
+    { name: 'celular', testMatch: 'cadastro.spec.js', use: { ...devices['Pixel 7'] } },
+    { name: 'api', testMatch: 'api-*.spec.js' },
   ],
 });

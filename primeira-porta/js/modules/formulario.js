@@ -82,8 +82,13 @@ function mensagemPara(campo) {
   if (v.tooShort) return `Digite pelo menos ${campo.minLength} caracteres.`;
   if (v.patternMismatch) return campo.title || 'Formato inválido.';
   if (v.typeMismatch) return campo.type === 'email' ? 'Inclua o @ e o domínio, por exemplo nome@email.com.' : 'Formato inválido.';
-  if (v.rangeOverflow) return `A data precisa ser até ${campo.max}.`;
+  if (v.rangeOverflow) return `A data precisa ser até ${dataBrasileira(campo.max)}.`;
   return 'Confira este campo.';
+}
+
+// O atributo max do campo de data é sempre ano-mês-dia; na tela a pessoa vê dia/mês/ano
+function dataBrasileira(data) {
+  return data.split('-').reverse().join('/');
 }
 
 // Usa o <small class="dica"> que já existe no HTML ou cria um para campos que não tinham

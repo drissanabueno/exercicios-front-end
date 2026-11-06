@@ -99,7 +99,7 @@ As mensagens de commit seguem o Conventional Commits em português: `feat:`, `fi
 
 ### Testes
 
-Os cenários de teste do formulário de cadastro estão em [`testes/cadastro.feature`](testes/cadastro.feature), escritos em Gherkin: fluxo principal, fluxos alternativos e exceções. Cada cenário virou um teste automático com Playwright ([`testes/cadastro.spec.js`](testes/cadastro.spec.js)), que roda no desktop e no celular com `npm test`. Os dois problemas que encontrei testando estão em [`testes/README.md`](testes/README.md).
+Os cenários de teste do formulário de cadastro estão em [`testes/cadastro.feature`](testes/cadastro.feature), escritos em Gherkin: fluxo principal, fluxos alternativos e exceções. Cada cenário virou um teste automático com Playwright ([`testes/cadastro.spec.js`](testes/cadastro.spec.js)), que roda no desktop e no celular com `npm test`. Há também testes da API do ViaCEP ([`testes/api-viacep.spec.js`](testes/api-viacep.spec.js)), que o formulário poderia usar para preencher cidade e estado pelo CEP. Os problemas e observações que encontrei testando estão em [`testes/README.md`](testes/README.md).
 
 ### Como ver
 
