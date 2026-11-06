@@ -4,7 +4,7 @@ Cenários de teste do formulário da [Primeira Porta](https://drissanabueno.gith
 
 Estão separados em fluxo principal (cadastro que dá certo), fluxos alternativos (campos opcionais, máscara, rascunho salvo, botão Limpar) e exceções (formulário vazio, formato errado, data fora do limite).
 
-Depois de escrever os cenários, transformei cada um em teste automático com Playwright, em [`cadastro.spec.js`](cadastro.spec.js). Os testes têm o mesmo nome dos cenários e rodam duas vezes, numa tela de computador e numa de celular (30 testes de tela).
+Depois de escrever os cenários, transformei cada um em teste automático com Playwright, em [`cadastro.spec.js`](cadastro.spec.js). Os testes têm o mesmo nome dos cenários e rodam duas vezes, numa tela de computador e numa de celular (32 testes de tela).
 
 ## Testes de API
 
@@ -33,4 +33,6 @@ Por padrão os testes abrem o site publicado. Para testar uma cópia local, rode
 
 **2. A mensagem da data aparecia no formato errado.** Com uma data depois de 2010, a mensagem dizia "A data precisa ser até 2010-12-31.", em ano-mês-dia, enquanto o campo mostra 31/12/2010. Agora a mensagem usa o mesmo formato do campo.
 
-Os dois estão corrigidos. Primeiro mudei os testes para o comportamento certo e vi que falhavam, depois corrigi o site e rodei de novo, então os testes avisam se algum deles voltar.
+**3. A página rolava para o lado em algumas larguras.** Em 768 px sobravam 35 px e em 1024 px sobravam 19 px. O submenu de Projetos, mesmo invisível, passava da borda direita da tela. Agora ele abre para a esquerda.
+
+Os três estão corrigidos. Primeiro mudei os testes para o comportamento certo e vi que falhavam, depois corrigi o site e rodei de novo, então os testes avisam se algum deles voltar.

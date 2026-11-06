@@ -76,6 +76,19 @@ test.describe('Fluxos alternativos', () => {
     await expect(page.getByLabel('Estado')).not.toHaveClass(/campo-invalido/);
   });
 
+  test('A página não rola para o lado em nenhuma largura de tela', async ({ page }) => {
+    const larguras = [375, 768, 1024, 1280, 1440];
+    const comRolagem = [];
+
+    for (const width of larguras) {
+      await page.setViewportSize({ width, height: 800 });
+      const sobra = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      if (sobra > 0) comRolagem.push(`${width} px: sobram ${sobra} px`);
+    }
+
+    expect(comRolagem).toEqual([]);
+  });
+
   test('O que eu digitei volta depois de recarregar a página', async ({ page }) => {
     await digitar(page, 'Nome completo', 'Ana');
     await page.reload();

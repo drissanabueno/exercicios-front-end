@@ -48,6 +48,10 @@ Funcionalidade: Cadastro na Primeira Porta
     Então o campo "Estado" mostra "PR"
     E o campo "Estado" não fica marcado com erro
 
+  Cenário: A página não rola para o lado em nenhuma largura de tela
+    Quando abro a página nas larguras de 375, 768, 1024, 1280 e 1440 px
+    Então em nenhuma delas aparece rolagem para o lado
+
   Cenário: O que eu digitei volta depois de recarregar a página
     Dado que digitei "Ana" no campo "Nome completo"
     Quando recarrego a página
